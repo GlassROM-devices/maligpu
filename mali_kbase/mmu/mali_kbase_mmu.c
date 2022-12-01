@@ -276,9 +276,9 @@ static void mmu_flush_invalidate(struct kbase_device *kbdev, struct kbase_contex
 		mmu_flush_invalidate_as(kbdev, &kbdev->as[as_nr], op_param);
 	} else {
 #if !MALI_USE_CSF
-		mutex_lock(&kbdev->js_data.queue_mutex);
+		rt_mutex_lock(&kbdev->js_data.queue_mutex);
 		ctx_is_in_runpool = kbase_ctx_sched_inc_refcount(kctx);
-		mutex_unlock(&kbdev->js_data.queue_mutex);
+		rt_mutex_unlock(&kbdev->js_data.queue_mutex);
 #else
 		ctx_is_in_runpool = kbase_ctx_sched_inc_refcount_if_as_valid(kctx);
 #endif /* !MALI_USE_CSF */
@@ -472,14 +472,14 @@ static void kbase_mmu_free_pgds_list(struct kbase_device *kbdev, struct kbase_mm
 {
 	struct page *page, *next_page;
 
-	mutex_lock(&mmut->mmu_lock);
+	rt_mutex_lock(&mmut->mmu_lock);
 
 	list_for_each_entry_safe(page, next_page, free_pgds_list, lru) {
 		list_del_init(&page->lru);
 		kbase_mmu_free_pgd(kbdev, mmut, page_to_phys(page));
 	}
 
-	mutex_unlock(&mmut->mmu_lock);
+	rt_mutex_unlock(&mmut->mmu_lock);
 }
 
 /**

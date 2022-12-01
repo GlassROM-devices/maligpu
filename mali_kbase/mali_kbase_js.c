@@ -620,7 +620,6 @@ void kbasep_js_devdata_halt(struct kbase_device *kbdev)
 void kbasep_js_devdata_term(struct kbase_device *kbdev)
 {
 	s8 zero_ctx_attr_ref_count[KBASEP_JS_CTX_ATTR_COUNT] = { 0, };
-	CSTD_UNUSED(js_devdata);
 
 	KBASE_DEBUG_ASSERT(kbdev != NULL);
 
@@ -682,7 +681,6 @@ void kbasep_js_kctx_term(struct kbase_context *kctx)
 	int js;
 	bool update_ctx_count = false;
 	unsigned long flags;
-	CSTD_UNUSED(js_kctx_info);
 
 	KBASE_DEBUG_ASSERT(kctx != NULL);
 
@@ -1792,7 +1790,6 @@ static kbasep_js_release_result kbasep_js_runpool_release_ctx_internal(
 	kbasep_js_release_result release_result = 0u;
 	bool runpool_ctx_attr_change = false;
 	int new_ref_count;
-	CSTD_UNUSED(kctx_as_nr);
 
 	KBASE_DEBUG_ASSERT(kbdev != NULL);
 	KBASE_DEBUG_ASSERT(kctx != NULL);

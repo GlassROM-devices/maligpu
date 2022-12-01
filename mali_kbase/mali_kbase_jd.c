@@ -1526,7 +1526,6 @@ static void jd_cancel_worker(struct kthread_work *data)
 	struct kbasep_js_kctx_info *js_kctx_info;
 	bool attr_state_changed;
 	struct kbase_device *kbdev;
-	CSTD_UNUSED(need_to_try_schedule_context);
 
 	/* Soft jobs should never reach this function */
 	KBASE_DEBUG_ASSERT((katom->core_req & BASE_JD_REQ_SOFT_JOB) == 0);
